@@ -1,0 +1,14 @@
+<ion-view title="Nutrition" id="page3">
+  <ion-content padding="true" class="has-header">
+    <ion-list id="nutrition-list2">
+      <ion-item ng-repeat="obj in list" class="item-thumbnail-left" id="nutrition-list-item13">
+        <img src="data:image/jpeg;base64, {{obj.thumbnail}}">
+        <h2>Food Name</h2>
+        <p>Calories: {{obj.cat}}</p>
+        <p>Fat: {{obj.fat}}</p>
+        <p>Carbohydrate: {{obj.ch}}</p>
+        <p>Protein: {{obj.pt}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

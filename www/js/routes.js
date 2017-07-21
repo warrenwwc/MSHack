@@ -1,4 +1,4 @@
-angular.module('app.routes', [])
+angular.module('app.routes', ['ionicUIRouter'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -19,22 +19,39 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('tabsController.cartTabDefaultPage', {
+  /* 
+    The IonicUIRouter.js UI-Router Modification is being used for this route.
+    To navigate to this route, do NOT use a URL. Instead use one of the following:
+      1) Using the ui-sref HTML attribute:
+        ui-sref='tabsController.nutrition'
+      2) Using $state.go programatically:
+        $state.go('tabsController.nutrition');
+    This allows your app to figure out which Tab to open this page in on the fly.
+    If you're setting a Tabs default page or modifying the .otherwise for your app and
+    must use a URL, use one of the following:
+      /page1/tab1/page3
+      /page1/tab2/page3
+  */
+  .state('tabsController.nutrition', {
     url: '/page3',
     views: {
+      'tab1': {
+        templateUrl: 'templates/nutrition.html',
+        controller: 'nutritionCtrl'
+      },
       'tab2': {
-        templateUrl: 'templates/cartTabDefaultPage.html',
-        controller: 'cartTabDefaultPageCtrl'
+        templateUrl: 'templates/nutrition.html',
+        controller: 'nutritionCtrl'
       }
     }
   })
 
-  .state('tabsController.cloudTabDefaultPage', {
+  .state('tabsController.exercise', {
     url: '/page4',
     views: {
       'tab3': {
-        templateUrl: 'templates/cloudTabDefaultPage.html',
-        controller: 'cloudTabDefaultPageCtrl'
+        templateUrl: 'templates/exercise.html',
+        controller: 'exerciseCtrl'
       }
     }
   })
