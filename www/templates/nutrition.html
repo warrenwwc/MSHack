@@ -3,7 +3,7 @@
     <ion-list id="nutrition-list2">
       <ion-item ng-repeat="obj in list" class="item-thumbnail-left" id="nutrition-list-item13">
         <img src="data:image/jpeg;base64, {{obj.thumbnail}}">
-        <h2>Food Name</h2>
+        <h2>{{obj.name}}</h2>
         <p>Calories: {{obj.cat}}</p>
         <p>Fat: {{obj.fat}}</p>
         <p>Carbohydrate: {{obj.ch}}</p>
