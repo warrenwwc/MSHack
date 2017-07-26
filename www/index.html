@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-
-    
     
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -47,7 +45,9 @@
       }
     </style>
 
+    <script src="js/dummyData.js"></script>
     <script src="js/reqData.js"></script>
+    <script src="js/camPlugin.js"></script>
       
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
@@ -72,9 +72,34 @@
 </div>
 <script>
     document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        console.log(navigator.camera);
+    
+    var camOptions = {
+      x: 0,
+      y: 180,
+      width: window.screen.width,
+      height: 360,
+      camera: 'rear',
+      toBack: false,
+      tapPhoto: true,
+      previewDrag: false
+    }; 
+
+    function onDeviceReady() {  
+        CameraPreview.startCamera(camOptions);
     }
+    
+    window.onhashchange = function() { 
+         console.log(window.location.hash); 
+        if (window.location.hash == "#/page1/page2") {
+            console.log("start");
+            CameraPreview.startCamera(camOptions);
+        }
+        else {
+            console.log("stop");
+            CameraPreview.stopCamera();
+        }
+    }
+    
 </script>
   </body>
 </html>

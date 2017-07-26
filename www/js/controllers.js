@@ -12,68 +12,48 @@ angular.module('app.controllers', [])
             $scope.heading = "Heading";
 
             $scope.TakePics = function() {
+                
+                CameraPreview.takePicture(async function(imgData){
+                    $scope.heading = "Processing";
+                   
+                    link = await $http(imgUrlReq(imgData));
 
-                navigator.camera.getPicture(onSuccess, onFail, {
-                    quality: 50,
-                    destinationType: Camera.DestinationType.DATA_URL
-                })
+                    res = await $http(cvApiReq(link.data));
 
-            };
-
-            onSuccess = function(imageData) {
-                $scope.heading = "Processing"
-                var image = document.getElementById('image');
-                image.src = "data:image/jpeg;base64," + imageData;
-
-                $http(imgUrlReq(imageData)).then(function(res) {
-                    url = res.data;
-                    $http(cvApiReq(url)).then(function(respond) {
-                        desc = respond.data.description.captions[0].text
-                        alert(desc);
-                        $scope.heading = desc;
-                        cat = 10;
-                        fat = 10;
-                        ch = 10;
-                        pt = 10;
-                        var obj = {
-                            "thumbnail": imageData,
-                            "name": desc,
-                            "cat": cat,
-                            "fat": fat,
-                            "ch": ch,
-                            "pt": pt
-                        };
-                        $rootScope.ttlcat += cat;
-                        $rootScope.ttlfat += fat;
-                        $rootScope.ttlch += ch;
-                        $rootScope.ttlpt += pt;
-                        $rootScope.list.push(obj);
-                    }, function(data) {
-                        alert("Failed in Computer Vision API process")
-                    });
-                }, function(data) {
-                    alert("Failed in uploading image")
+                    desc = res.data.description.captions[0].text;
+                    
+                    $scope.heading = desc;
+                    
+                    $scope.$apply();
+                    
+                    cat = 10;
+                    fat = 10;
+                    ch = 10;
+                    pt = 10;
+                    
+                    food = getMatch(desc);
+                    
+                    var obj = {
+                        "thumbnail": String(imgData),
+                        "name": food.name,
+                        "cat": food.cal,
+                        "fat": food.fat,
+                        "ch": food.carb,
+                        "pt": food.pro
+                    };
+                    
+                    $rootScope.ttlcat += obj.cat;
+                    $rootScope.ttlfat += obj.fat;
+                    $rootScope.ttlch += obj.ch;
+                    $rootScope.ttlpt += obj.pt;
+                    $rootScope.list.push(obj);
+                    
+                    $rootscope.$digest();
+                    
                 });
-
-
-                //        var req = {
-                //         method: 'POST',
-                //         url: 'https://mshackimageapi.azurewebsites.net/api/imageapi?code=yrlwmBHn3oGpo9Dy5h0yndytaQjZEao4Ud/OnfrEQLCdTLmJtEeIjQ==',
-                //         headers: {
-                //           'Content-Type': 'application/json'
-                //         },
-                //         data: { 'img': imageData }
-                //        }
-                //
-                //        $http(req).then(function(res){
-                //            alert(res.data);
-                //        }, function(data){});
-
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
+                                                      
+                
+            };
 
         }
     ])
