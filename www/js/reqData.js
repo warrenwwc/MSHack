@@ -5,7 +5,7 @@ function imgUrlReq(img) {
      headers: {
        'Content-Type': "application/json"
      },
-     data: { 'img': img }
+     data: { 'img': String(img) }
     }
 
     return req;

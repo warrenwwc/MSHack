@@ -10,70 +10,43 @@ angular.module('app.controllers', [])
             $rootScope.ttlch = 0;
             $rootScope.ttlpt = 0;
             $scope.heading = "Heading";
-
+            
             $scope.TakePics = function() {
+                
+                CameraPreview.takePicture(function(imgData){
+                    $scope.heading = "Processing"
 
-                navigator.camera.getPicture(onSuccess, onFail, {
-                    quality: 50,
-                    destinationType: Camera.DestinationType.DATA_URL
-                })
-
-            };
-
-            onSuccess = function(imageData) {
-                $scope.heading = "Processing"
-                var image = document.getElementById('image');
-                image.src = "data:image/jpeg;base64," + imageData;
-
-                $http(imgUrlReq(imageData)).then(function(res) {
-                    url = res.data;
-                    $http(cvApiReq(url)).then(function(respond) {
-                        desc = respond.data.description.captions[0].text
-                        alert(desc);
-                        $scope.heading = desc;
-                        cat = 10;
-                        fat = 10;
-                        ch = 10;
-                        pt = 10;
-                        var obj = {
-                            "thumbnail": imageData,
-                            "name": desc,
-                            "cat": cat,
-                            "fat": fat,
-                            "ch": ch,
-                            "pt": pt
-                        };
-                        $rootScope.ttlcat += cat;
-                        $rootScope.ttlfat += fat;
-                        $rootScope.ttlch += ch;
-                        $rootScope.ttlpt += pt;
-                        $rootScope.list.push(obj);
-                    }, function(data) {
-                        alert("Failed in Computer Vision API process")
+                    $http(imgUrlReq(imgData)).then(function(res) {
+                        url = res.data;
+                        $http(cvApiReq(url)).then(function(respond) {
+                            desc = respond.data.description.captions[0].text;
+                            $scope.heading = desc;
+                            cat = 10;
+                            fat = 10;
+                            ch = 10;
+                            pt = 10;
+                            var obj = {
+                                "thumbnail": imageData,
+                                "name": desc,
+                                "cat": cat,
+                                "fat": fat,
+                                "ch": ch,
+                                "pt": pt
+                            };
+                            $rootScope.ttlcat += cat;
+                            $rootScope.ttlfat += fat;
+                            $rootScope.ttlch += ch;
+                            $rootScope.ttlpt += pt;
+                            $rootScope.list.push(obj);
+                            alert($rootScope.list[0]);
+                        }, function(res) {
+                            alert("Failed in Computer Vision API process");
+                        });
+                    }, function(res) {
+                        alert("Failed in uploading image");
                     });
-                }, function(data) {
-                    alert("Failed in uploading image")
                 });
-
-
-                //        var req = {
-                //         method: 'POST',
-                //         url: 'https://mshackimageapi.azurewebsites.net/api/imageapi?code=yrlwmBHn3oGpo9Dy5h0yndytaQjZEao4Ud/OnfrEQLCdTLmJtEeIjQ==',
-                //         headers: {
-                //           'Content-Type': 'application/json'
-                //         },
-                //         data: { 'img': imageData }
-                //        }
-                //
-                //        $http(req).then(function(res){
-                //            alert(res.data);
-                //        }, function(data){});
-
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
+            };
 
         }
     ])
@@ -83,6 +56,10 @@ angular.module('app.controllers', [])
         // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function($scope, $stateParams, $rootScope) {
 
+            $scope.stopCam = function() {
+                //CameraPreview.stopCamera();
+                console.log("test");
+            }
 
         }
     ])
