@@ -18,17 +18,18 @@ angular.module('app.controllers', [])
                    
                     link = await $http(imgUrlReq(imgData));
 
-                    res = await $http(cvApiReq(link.data));
-
+                    res = await $http(cvApiReq2(link.data));
+                    
+                    desc = res.data.Predictions[0].Probability.toFixed(2) > 0.5 ? res.data.Predictions[0].Tag +" (" + res.data.Predictions[0].Probability.toFixed(2) + "%)" : "Generic";
                     //desc = res.data.description.captions[0].text;
-                    tags = res.data.tags;
+//                    tags = res.data.tags;
+//                    
+//                    tagString = "";
+//                    for (i in tags) {
+//                        tagString += tags[i].name + " ";
+//                    }
                     
-                    tagString = "";
-                    for (i in tags) {
-                        tagString += tags[i].name + " ";
-                    }
-                    
-                    $scope.heading = tagString;
+                    $scope.heading = desc;
                     
                     $scope.$apply();
                     
@@ -37,7 +38,7 @@ angular.module('app.controllers', [])
                     ch = 10;
                     pt = 10;
                     
-                    food = getMatch(tagString);
+                    food = getMatch(desc);
                     
                     var obj = {
                         "thumbnail": String(imgData),

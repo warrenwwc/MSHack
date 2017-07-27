@@ -26,3 +26,17 @@ function cvApiReq(url) {
 
     return req;
 }
+
+function cvApiReq2(url) {
+    var req = {
+     method: 'POST',
+     url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/2b00384f-eebb-4d57-85c2-fa64a487608f/url?iterationId=7a9831d8-c0a1-4e27-94c0-38bb9796caa2',
+     headers: {
+       'Content-Type': "application/json",
+        'Prediction-Key': "a4948b813d60417e90a57b749b4c2d39"
+     },
+     data: { 'Url': url }
+    }
+
+    return req;
+}
