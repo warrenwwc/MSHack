@@ -20,9 +20,15 @@ angular.module('app.controllers', [])
 
                     res = await $http(cvApiReq(link.data));
 
-                    desc = res.data.description.captions[0].text;
+                    //desc = res.data.description.captions[0].text;
+                    tags = res.data.tags;
                     
-                    $scope.heading = desc;
+                    tagString = "";
+                    for (i in tags) {
+                        tagString += tags[i].name + " ";
+                    }
+                    
+                    $scope.heading = tagString;
                     
                     $scope.$apply();
                     
@@ -31,7 +37,7 @@ angular.module('app.controllers', [])
                     ch = 10;
                     pt = 10;
                     
-                    food = getMatch(desc);
+                    food = getMatch(tagString);
                     
                     var obj = {
                         "thumbnail": String(imgData),
@@ -62,7 +68,9 @@ angular.module('app.controllers', [])
         // You can include any angular dependencies as parameters for this function
         // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function($scope, $stateParams, $rootScope) {
-
+           $scope.DeleteItem = function(index) {
+               $rootScope.list.splice(index,1);
+           }
 
         }
     ])

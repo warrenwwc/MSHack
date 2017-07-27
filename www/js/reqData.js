@@ -15,7 +15,8 @@ function imgUrlReq(img) {
 function cvApiReq(url) {
     var req = {
      method: 'POST',
-     url: 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description&language=en',
+     //url: 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description&language=en',
+     url: 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Tags&language=en',
      headers: {
        'Content-Type': "application/json",
         'Ocp-Apim-Subscription-Key': "63fd25c94e984ee8aa65c34b59ce094a"
