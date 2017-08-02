@@ -1,4 +1,6 @@
+var app = angular.module('mshack', ['ionic', 'ionic-material']);
 angular.module('app.controllers', [])
+
 
     .controller('cameraTabDefaultPageCtrl', ['$scope', '$stateParams', '$http', '$rootScope', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
         // You can include any angular dependencies as parameters for this function
@@ -16,9 +18,9 @@ angular.module('app.controllers', [])
                 CameraPreview.takePicture(async function(imgData){
                     $scope.heading = "Processing";
                    
-                    link = await $http(imgUrlReq(imgData));
+                    link = await $http(imgUrlReq(imgData)); //pass image to the link api 
 
-                    res = await $http(cvApiReq2(link.data));
+                    res = await $http(cvApiReq2(link.data)); //pass image to vision api 
                     
                     desc = res.data.Predictions[0].Probability.toFixed(2) > 0.5 ? res.data.Predictions[0].Tag +" (" + res.data.Predictions[0].Probability.toFixed(2) * 100 + "%)" : "Generic";
                     //desc = res.data.description.captions[0].text;
@@ -28,9 +30,8 @@ angular.module('app.controllers', [])
 //                    for (i in tags) {
 //                        tagString += tags[i].name + " ";
 //                    }
-                    
-                    $scope.heading = desc;
-                    
+
+                    $scope.heading = desc; 
                     $scope.$apply();
                     
                     cat = 10;
