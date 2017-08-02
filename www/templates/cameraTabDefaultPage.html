@@ -1,4 +1,7 @@
 <ion-view title="Camera Tab Default Page" id="page2">
+  <ion-nav-title>
+      <img src="img/Snapcount.png" style="height: 30px; width: 150px; left: 6px; top: 8px; position: fixed;">
+</ion-nav-title>
   <ion-content padding="true" class="has-header">
     <h2 id="cameraTabDefaultPage-heading1" style="color:#000000;" ng-bind="heading"></h2>
 <!--
@@ -8,8 +11,11 @@
       </p>
     </div>
 -->
-    <div id="cameraTabDefaultPage-button-bar1" class="button-bar" style="position: fixed;bottom: 5px; left:0px">
-      <a ng-click="TakePics()" id="cameraTabDefaultPage-button6" class="button button-positive button-block icon ion-ios-camera-outline"></a>
+<!--
+    <div id="cameraTabDefaultPage-button-bar1" class="button-bar" style="position: fixed;bottom: -10px; left:0px">
+      <a ng-click="TakePics()" id="cameraTabDefaultPage-button6" style="background-color: #f53d3d" class="button button-positive button-block icon ion-ios-camera-outline"></a>
     </div>
+-->
+    <a ng-click="TakePics()" id="cameraTabDefaultPage-button6" style="width:100%; position: fixed;bottom: -10px; left:0px; background-color: #f53d3d" class="button button-positive button-block icon ion-ios-camera-outline"></a>
   </ion-content>
 </ion-view>
