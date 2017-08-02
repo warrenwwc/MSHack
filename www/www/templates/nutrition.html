@@ -1,0 +1,20 @@
+<ion-view title="Nutrition" id="page3"  style="height: 100%; width: 100%; background-image: url('img/nutrition.jpg');">
+  <ion-nav-title>
+      <img src="img/Snapcount.png" style="height: 30px; width: 150px; left: 6px; top: 8px; position: fixed;">
+</ion-nav-title>
+ <!-- <div class="hero slide-up" id = "block2" style="background-image: url('img/nutrition.jpg');" > --> 
+  <ion-content padding="true" class="animate-fade-slide-in">
+    <ion-list id="nutrition-list2" class="list half">
+      <ion-item ng-repeat="obj in list track by $index" class="card card-gallery item item-text-wrap" id="nutrition-list-item13">
+        <img src="data:image/jpeg;base64, {{obj.thumbnail}}" class="full-image" ng-click="DeleteItem($index)">
+      <!-- class="item-thumbnail-left" -->
+    
+      <h2>{{obj.name}}</h2>
+        <p>Calories: {{obj.cat}}</p>
+        <p>Fat: {{obj.fat}}</p>
+        <p>Carbohydrate: {{obj.ch}}</p>
+        <p>Protein: {{obj.pt}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
