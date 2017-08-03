@@ -20,7 +20,9 @@ angular.module('app.controllers', [])
 
                     res = await $http(cvApiReq2(link.data));
                     
-                    desc = res.data.Predictions[0].Probability.toFixed(2) > 0.5 ? res.data.Predictions[0].Tag +" (" + res.data.Predictions[0].Probability.toFixed(2) * 100 + "%)" : "Generic";
+                    tag = res.data.Predictions[0].Tag;
+                    
+                    desc = res.data.Predictions[0].Probability.toFixed(2) > 0.5 ? tag +" (" + res.data.Predictions[0].Probability.toFixed(2) * 100 + "%)" : "Generic";
                     //desc = res.data.description.captions[0].text;
 //                    tags = res.data.tags;
 //                    
@@ -34,11 +36,11 @@ angular.module('app.controllers', [])
                     $scope.$apply();
                     
                     
-                    food = getMatch(desc);
+                    food = getMatch(tag);
                     
                     var obj = {
                         "thumbnail": String(imgData),
-                        "name": food.name.replace("_", " "),
+                        "name": tag.replace("_", " "),
                         "cat": food.cal,
                         "fat": food.fat,
                         "ch": food.carb,
