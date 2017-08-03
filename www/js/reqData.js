@@ -30,10 +30,10 @@ function cvApiReq(url) {
 function cvApiReq2(url) {
     var req = {
      method: 'POST',
-     url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/2b00384f-eebb-4d57-85c2-fa64a487608f/url?iterationId=d0decdcc-9ef3-49ae-830e-4be25ea6ae46',
+     url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/36828cac-266e-411f-be0b-74167e316ae0/url?iterationId=cd1a8582-de48-458d-917f-13056a498dd2',
      headers: {
        'Content-Type': "application/json",
-        'Prediction-Key': "a4948b813d60417e90a57b749b4c2d39"
+        'Prediction-Key': "92ef23dd78d545529ff5814c58c945cc"
      },
      data: { 'Url': url }
     }

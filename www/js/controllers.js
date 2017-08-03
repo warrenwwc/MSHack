@@ -9,7 +9,7 @@ angular.module('app.controllers', [])
             $rootScope.ttlfat = 0;
             $rootScope.ttlch = 0;
             $rootScope.ttlpt = 0;
-            $scope.heading = "Heading";
+            $scope.heading = "Snap";
 
             $scope.TakePics = function() {
                 
