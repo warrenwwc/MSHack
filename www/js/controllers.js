@@ -33,16 +33,12 @@ angular.module('app.controllers', [])
                     
                     $scope.$apply();
                     
-                    cat = 10;
-                    fat = 10;
-                    ch = 10;
-                    pt = 10;
                     
                     food = getMatch(desc);
                     
                     var obj = {
                         "thumbnail": String(imgData),
-                        "name": food.name,
+                        "name": food.name.replace("_", " "),
                         "cat": food.cal,
                         "fat": food.fat,
                         "ch": food.carb,
